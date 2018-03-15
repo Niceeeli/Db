@@ -34,11 +34,11 @@
  **找出 自增字段 不在符合索引第一位 或者不是一个单独的key  影响 count(*) 的 table**
  
  
- Select A.TABLE_SCHEMA,A.TABLE_NAME
- From  (select TABLE_SCHEMA,TABLE_NAME,COLUMN_NAME From information_schema.columns where EXTRA='auto_increment' ) A,
-      (select TABLE_SCHEMA,TABLE_NAME,COLUMN_NAME,ORDINAL_POSITION  From information_schema.KEY_COLUMN_USAGE   ) B
-Where A.TABLE_SCHEMA=B.TABLE_SCHEMA and A.TABLE_NAME=B.TABLE_NAME and A.COLUMN_NAME=B.COLUMN_NAME 
-Group by A.TABLE_SCHEMA,A.TABLE_NAME Having min(ORDINAL_POSITION) > 1 ; 
+        Select A.TABLE_SCHEMA,A.TABLE_NAME
+        From  (select TABLE_SCHEMA,TABLE_NAME,COLUMN_NAME From information_schema.columns where EXTRA='auto_increment' ) A,
+        (select TABLE_SCHEMA,TABLE_NAME,COLUMN_NAME,ORDINAL_POSITION  From information_schema.KEY_COLUMN_USAGE   ) B
+        Where A.TABLE_SCHEMA=B.TABLE_SCHEMA and A.TABLE_NAME=B.TABLE_NAME and A.COLUMN_NAME=B.COLUMN_NAME 
+        Group by A.TABLE_SCHEMA,A.TABLE_NAME Having min(ORDINAL_POSITION) > 1 ; 
  
  
  
