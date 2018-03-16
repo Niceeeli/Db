@@ -2,7 +2,8 @@
 
 #Db for mysql 
 
-**common sql**
+ 
+[common sql](/mysql/common%20sql.md) 
 
 
 
