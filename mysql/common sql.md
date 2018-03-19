@@ -204,6 +204,13 @@ SUB_PART > 10 ORDER BY SUB_PART DESC;
 
 
  
+ **查看库各个表自增id的使用情况** 
  
- 
+        SELECT   t.TABLE_NAME,   c.COLUMN_NAME,   ts.AUTO_INCREMENT 
+        FROM   INFORMATION_SCHEMA.TABLE_CONSTRAINTS AS t,   
+        information_schema.TABLES AS ts,   
+        information_schema.KEY_COLUMN_USAGE AS c 
+        WHERE   t.TABLE_NAME = ts.TABLE_NAME   AND ts.TABLE_NAME  = c.TABLE_NAME   
+        AND  t.TABLE_SCHEMA = 'event' AND t.table_schema=ts.table_schema 
+        AND t.table_schema=c.table_schema AND t.CONSTRAINT_TYPE = 'PRIMARY KEY'   ORDER BY ts.`AUTO_INCREMENT` DESC
  
