@@ -1,7 +1,7 @@
 
 
 
-#common sql
+#  common sql
 
 
 **查询非innodb引擎的表**
