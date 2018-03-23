@@ -43,7 +43,7 @@
  
  
  
-**找出没有创建主键的表 
+**找出没有创建主键的表**
 
 
     select concat(t.table_schema,'.',t.TABLE_NAME) as tablename 
