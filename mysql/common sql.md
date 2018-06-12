@@ -226,3 +226,18 @@ SUB_PART > 10 ORDER BY SUB_PART DESC;
     in ('alter' , 'optim', 'repai', 'lock ', 'drop ', 'creat'))) p  
     where timestampdiff(second, i.trx_started, now()) > p.time  and 
     i.trx_mysql_thread_id not in (connection_id(),p.id);
+    
+   **查看自增值的使用情况**
+    
+    SELECT table_schema, table_name, column_name, auto_increment,
+    pow(2, case data_type
+      when 'tinyint'   then 7
+      when 'smallint'  then 15
+      when 'mediumint' then 23
+      when 'int'       then 31
+      when 'bigint'    then 63
+      end+(column_type like '% unsigned'))-1 as max_int
+    FROM information_schema.tables t
+    JOIN information_schema.columns c USING (table_schema,table_name)
+    WHERE c.extra = 'auto_increment' AND t.auto_increment IS NOT NULL\G
+
